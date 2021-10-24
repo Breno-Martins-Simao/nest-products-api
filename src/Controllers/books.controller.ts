@@ -15,8 +15,8 @@ export class BooksController {
     }
 
     @Get(':id')
-    async getOne(@Param() params):Promise<Book> {
-        return this.productsService.getOne(params.id)
+    async getOne(@Param('id') id:number):Promise<Book> {
+        return this.productsService.getOne(id)
     }
 
     @Post()
@@ -30,8 +30,8 @@ export class BooksController {
     }
 
     @Delete(':id')
-    async delete(@Param() params):Promise<Book>{
-        return this.productsService.delete(params.id)
+    async delete(@Param('id') id:number):Promise<Book>{
+        return this.productsService.delete(id)
     }
 
 
