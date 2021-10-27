@@ -2,6 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common"
 
 import { Book } from "src/Models/book.model";
 import { BooksServices } from "src/Services/books.services";
+import { IBook } from "src/Interfaces/book.interface";
+import { Converters } from "src/Utils/converters.utils";
 
 @Controller('books')
 export class BooksController {
@@ -20,13 +22,14 @@ export class BooksController {
     }
 
     @Post()
-    async create(@Body() body : Book):Promise<Book> {
-        return this.productsService.create(body)
+    async create(@Body() body : IBook):Promise<Book> {
+        console.log(Converters.IbookToBook(body))
+        return this.productsService.create(Converters.IbookToBook(body))
     }
 
     @Put()
-    async update(@Body() body:Book): Promise<[number, Book[]]> {
-        return this.productsService.update(body)
+    async update(@Body() body:IBook): Promise<[number, Book[]]> {
+        return this.productsService.update(Converters.IbookToBook(body))
     }
 
     @Delete(':id')
